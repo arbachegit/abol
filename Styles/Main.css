@@ -1,3 +1,6 @@
+
+href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+rel="stylesheet"
 /* Estilos básicos para o body e html */
 body, html {
       margin: 0;
@@ -80,16 +83,16 @@ body, html {
     .chat-container::-webkit-scrollbar {
       width: 8px;
     }
-
+/* Estilização da trilha da barra de rolagem */
     .chat-container::-webkit-scrollbar-track {
       background: #f1f1f1;
     }
-
+/* Estilização do polegar da barra de rolagem */
     .chat-container::-webkit-scrollbar-thumb {
       background: #888;
       border-radius: 4px;
     }
-
+/* Estilização do polegar da barra de rolagem ao passar o mouse */
     .chat-container::-webkit-scrollbar-thumb:hover {
       background: #555;
     }
