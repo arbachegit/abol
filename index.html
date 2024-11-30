@@ -27,6 +27,7 @@
     />
     <!-- Importação do arquivo de estilos customizados local para estilizações específicas do projeto -->
     <link rel="stylesheet" href="./Styles/Main.css" />
+    <link rel="icon" href="./Images/favicon.ico" type="image/x-icon">
   </head>
 
   <!-- Corpo da página -->
@@ -226,10 +227,12 @@
             // Adiciona delay para simular digitação
             setTimeout(() => {
               setIsTyping(false);
-              
+             
               addMessage(
-                "RiskBot", 
-                `Olá ${userData.name} da ${userData.company}! Clique no botão abaixo para acessar o conteúdo.`
+                "RiskBot",
+                <div>
+                  Olá <strong>{userData.name}</strong> da <strong>{userData.company}</strong>! Clique no botão abaixo para acessar o conteúdo.
+                </div>
               );
 
               // Adiciona o indicador de digitação
