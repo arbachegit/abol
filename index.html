@@ -1,3 +1,5 @@
+
+
 <!doctype html>
 <html lang="pt-BR">
   <!-- Cabeçalho HTML com configurações básicas -->
@@ -7,16 +9,23 @@
     <title>O impacto da IA em nossas vidas</title> <!-- Título da página -->
     
     <!-- Importação das bibliotecas React necessárias -->
+    <!-- React Core: Biblioteca principal do React que fornece funcionalidades básicas para criar componentes e gerenciar estado -->
     <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
+    <!-- React DOM: Biblioteca que permite renderizar componentes React no navegador e manipular o DOM -->
+    <!-- DOM (Document Object Model) é uma interface de programação que representa documentos HTML e XML como uma estrutura de árvore,
+    onde cada nó representa um elemento, atributo ou texto do documento. O DOM permite que programas e scripts acessem e manipulem 
+    dinamicamente o conteúdo, estrutura e estilo de documentos web. -->
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
+    <!-- Babel: Compilador que permite usar JSX e recursos modernos do JavaScript convertendo-os para código compatível com navegadores -->
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     
     <!-- Importação do Tailwind CSS para estilização -->
+    <!-- Link para importar o framework Tailwind CSS que fornece classes utilitárias para estilização -->
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
-    <!-- Importação do arquivo de estilos customizados -->
+    <!-- Importação do arquivo de estilos customizados local para estilizações específicas do projeto -->
     <link rel="stylesheet" href="./Styles/Main.css" />
   </head>
 
@@ -35,20 +44,7 @@
         RiskBot: { image: "./Images/RiskBot.png" }
       };
 
-      // Componente de barra de progresso genérica
-      const Progress = ({ value, className, ...props }) => {
-        return (
-          <div
-            className={`w-full bg-gray-200 rounded-full h-2.5 ${className}`}
-            {...props}
-          >
-            <div
-              className="bg-blue-600 h-2.5 rounded-full transition-all duration-300 ease-in-out"
-              style={{ width: `${value}%` }}
-            ></div>
-          </div>
-        );
-      };
+  
 
       // Componente da barra de progresso específica do RiskBot
       const RiskBotProgressBar = ({ progress = 0 }) => {
@@ -82,21 +78,20 @@
         );
       };
 
-      // Componente para exibir avatares dos personagens
+     
+      // Este componente CharacterAvatars é responsável por renderizar o avatar/imagem de um personagem
+      // Ele recebe o nome do personagem como prop e:
+      // 1. Busca os dados do personagem em um objeto CHARACTERS
+      // 2. Exibe a imagem do personagem se encontrada, ou uma imagem padrão caso contrário
+      // 3. Aplica estilização para tornar a imagem circular e com dimensões específicas
       function CharacterAvatars({ characterName }) {
-        const character = CHARACTERS[characterName];
-
-        if (!character) {
-          console.error(`Character "${characterName}" não encontrado!`);
-          return null;
-        }
-
+        // Como só temos o RiskBot, podemos simplificar o componente
         return (
           <div className="character-avatar">
             <img
-              src={character.image || "/Images/default-avatar.png"}
-              alt={`${characterName} avatar`}
-              className="w-30 h-15 rounded-full mr-2"
+              src="./Images/RiskBot.png" 
+              alt="RiskBot avatar"
+              className="w-30 h-30 rounded-full mr-2"
             />
           </div>
         );
@@ -116,46 +111,7 @@
           </svg>
         );
       }
-
-      // Componente de seta de rolagem
-      function ScrollArrow() {
-        const [isVisible, setIsVisible] = useState(false);
-        const chatContainerRef = useRef(null);
-
-        // Gerencia visibilidade da seta baseado na posição da rolagem
-        useEffect(() => {
-          const handleScroll = () => {
-            if (chatContainerRef.current) {
-              const { scrollTop, scrollHeight, clientHeight } = chatContainerRef.current;
-              setIsVisible(scrollHeight - scrollTop > clientHeight + 100);
-            }
-          };
-
-          const container = chatContainerRef.current;
-          if (container) {
-            container.addEventListener('scroll', handleScroll);
-            return () => container.removeEventListener('scroll', handleScroll);
-          }
-        }, []);
-
-        // Função para rolar até o final
-        const scrollToBottom = () => {
-          if (chatContainerRef.current) {
-            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
-          }
-        };
-
-        return (
-          <div className={`scroll-arrow ${isVisible ? 'visible' : ''}`}>
-            <button onClick={scrollToBottom} className="scroll-arrow-button">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <polyline points="6 9 12 15 18 9"></polyline>
-              </svg>
-            </button>
-          </div>
-        );
-      }
-
+      
       // Componente principal da interface de chat
       function ChatInterface() {
         // Gerenciamento de estado do usuário
@@ -165,18 +121,36 @@
           : { name: "", email: "", company: "" };
        
         // Estado inicial das mensagens
-        const [messages, setMessages] = useState([
-          {
-            character: "RiskBot",
-            text: 'Olá, meu nome é RiskBot. Vou apresentar um tema muito interessante para você. Mudança ou Extinção: Como a IA Transformará o Setor Logístico',
-            isFirstMessage: true,
-          },
-          {
-            character: "RiskBot",
-            text: "Este conteúdo foi feito especialmente para a ABOL e ele será continuamente atualizado com novas informações e insights.",
-            showButton: true,
-          },
-        ]);
+        const [messages, setMessages] = useState([]);
+        
+        useEffect(() => {
+          // Mostrar typing indicator inicial
+          setIsTyping(true);
+          
+          // Primeira mensagem após 1 segundo
+          setTimeout(() => {
+            setIsTyping(false);
+            setMessages([{
+              character: "RiskBot",
+              text: 'Olá, meu nome é RiskBot. Vou apresentar um tema muito interessante para você. Mudança ou Extinção: Como a IA Transformará o Setor Logístico',
+              isFirstMessage: true,
+            }]);
+            
+            // Typing indicator entre mensagens
+            setIsTyping(true);
+            
+            // Segunda mensagem após mais 1 segundo
+            setTimeout(() => {
+              setIsTyping(false);
+              setMessages(prev => [...prev, {
+                character: "RiskBot", 
+                text: "Este conteúdo foi feito especialmente para a ABOL e ele será continuamente atualizado com novas informações e insights.",
+                showButton: true,
+              }]);
+            }, 2000);
+            
+          }, 2000);
+        }, []);
 
         // Estados diversos para controle da interface
         const [showUserForm, setShowUserForm] = useState(false);
@@ -245,22 +219,51 @@
             
             // Adiciona uma mensagem de boas-vindas personalizada do RiskBot
             // usando o nome e empresa fornecidos pelo usuário
-            addMessage(
-              "RiskBot", 
-              `Olá ${userData.name} da ${userData.company}! Clique no botão abaixo para acessar o conteúdo.`
-            );
-            // Abre o diálogo com o botão de acesso ao conteúdo
-            addMessage(
-              "RiskBot",
-              <div>
-                <button
-                  onClick={() => window.open("https://genai.knowfuture.tech/log", "_blank")}
-                  className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                >
-                  Acessar Conteúdo
-                </button>
-              </div>
-            );
+            // Adiciona o indicador de digitação
+            // Adiciona o indicador de digitação fora da caixa de diálogo
+            setIsTyping(true);
+
+            // Adiciona delay para simular digitação
+            setTimeout(() => {
+              setIsTyping(false);
+              
+              addMessage(
+                "RiskBot", 
+                `Olá ${userData.name} da ${userData.company}! Clique no botão abaixo para acessar o conteúdo.`
+              );
+
+              // Adiciona o indicador de digitação
+              setIsTyping(true);
+              
+              setTimeout(() => {
+                setIsTyping(false);
+                
+                // Adiciona o botão de acesso após a mensagem de boas-vindas
+                addMessage(
+                  "RiskBot",
+                  <div className="flex flex-col items-center space-y-4">
+                    <div className="flex flex-row space-x-4">
+                      <a 
+                        href="https://genai.knowfuture.tech/log"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block"
+                      >
+                        Acessar Conteúdo
+                      </a>
+                      <a
+                        href="https://arbachegit.github.io/ambidestriaInova/" 
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded inline-block"
+                      >
+                        Quer testar a sua ambidestria?
+                      </a>
+                    </div>
+                  </div>
+                );
+              }, 2000); // 2 segundos de delay
+            }, 2000); // 2 segundos de delay
             
           } catch (error) {
             console.error("Erro ao processar o formulário:", error);
@@ -337,7 +340,7 @@
                     </div>
                   )}
                   
-                  <ScrollArrow />
+                
                 </div>
               </div>
             </div>
