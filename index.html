@@ -6,7 +6,7 @@
   <head>
     <meta charset="UTF-8" /> <!-- Define codificação de caracteres -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Configuração para responsividade -->
-    <title>O impacto da IA em nossas vidas</title> <!-- Título da página -->
+    <title>Bem-vindo ao mundo da IA</title> <!-- Título da página -->
     
     <!-- Importação das bibliotecas React necessárias -->
     <!-- React Core: Biblioteca principal do React que fornece funcionalidades básicas para criar componentes e gerenciar estado -->
@@ -26,8 +26,9 @@
       rel="stylesheet"
     />
     <!-- Importação do arquivo de estilos customizados local para estilizações específicas do projeto -->
+    <link rel="icon" href="./Images/favicon.png" type="image/png">
     <link rel="stylesheet" href="./Styles/Main.css" />
-    <link rel="icon" href="./Images/favicon.ico" type="image/x-icon">
+   
   </head>
 
   <!-- Corpo da página -->
@@ -60,7 +61,7 @@
                       alt="KnowRisk Logo"
                       className="h-16 mt-2 mr-4"
                     />
-                    <div className="w-16 h-16 flex items-center justify-center overflow-hidden">
+                    <div className="w-12 h-12 flex items-center justify-center overflow-hidden">
                       <img
                         src="./Images/RiskBot.png"
                         alt="KnowBot Logo"
@@ -133,7 +134,11 @@
             setIsTyping(false);
             setMessages([{
               character: "RiskBot",
-              text: 'Olá, meu nome é RiskBot. Vou apresentar um tema muito interessante para você. Mudança ou Extinção: Como a IA Transformará o Setor Logístico',
+              text:<div>
+                Olá, meu nome é RiskBot. <strong>Bem vindo a nova era da IA.</strong> 
+                 Estaremos falando de IA em nosso Bot.
+                <strong>O conteúdo será atualizado semanalmente</strong>. Volte sempre que puder!! Vamos lá?
+              </div>,
               isFirstMessage: true,
             }]);
             
@@ -145,7 +150,7 @@
               setIsTyping(false);
               setMessages(prev => [...prev, {
                 character: "RiskBot", 
-                text: "Este conteúdo foi feito especialmente para a ABOL e ele será continuamente atualizado com novas informações e insights.",
+                text: "Este conteúdo foi feito especialmente para quem quer saber a respeito de IA e inovação. Como disse, ele será continuamente atualizado com novas informações e insights.",
                 showButton: true,
               }]);
             }, 2000);
@@ -247,7 +252,7 @@
                   <div className="flex flex-col items-center space-y-4">
                     <div className="flex flex-row space-x-4">
                       <a 
-                        href="https://genai.knowfuture.tech/log"
+                        href="https://genai.knowfuture.tech/genai"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block"
