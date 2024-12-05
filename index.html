@@ -1,93 +1,72 @@
-
-
 <!doctype html>
 <html lang="pt-BR">
-  <!-- Cabeçalho HTML com configurações básicas -->
   <head>
-    <meta charset="UTF-8" /> <!-- Define codificação de caracteres -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- Configuração para responsividade -->
-    <title>Bem-vindo ao mundo da IA</title> <!-- Título da página -->
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bem-vindo ao mundo da IA</title>
     
-    <!-- Importação das bibliotecas React necessárias -->
-    <!-- React Core: Biblioteca principal do React que fornece funcionalidades básicas para criar componentes e gerenciar estado -->
-    <script src="https://unpkg.com/react@17/umd/react.production.min.js"></script>
-    <!-- React DOM: Biblioteca que permite renderizar componentes React no navegador e manipular o DOM -->
-    <!-- DOM (Document Object Model) é uma interface de programação que representa documentos HTML e XML como uma estrutura de árvore,
-    onde cada nó representa um elemento, atributo ou texto do documento. O DOM permite que programas e scripts acessem e manipulem 
-    dinamicamente o conteúdo, estrutura e estilo de documentos web. -->
-    <script src="https://unpkg.com/react-dom@17/umd/react-dom.production.min.js"></script>
-    <!-- Babel: Compilador que permite usar JSX e recursos modernos do JavaScript convertendo-os para código compatível com navegadores -->
+    <!-- Atualizado para React 18 -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     
-    <!-- Importação do Tailwind CSS para estilização -->
-    <!-- Link para importar o framework Tailwind CSS que fornece classes utilitárias para estilização -->
     <link
       href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
       rel="stylesheet"
     />
-    <!-- Importação do arquivo de estilos customizados local para estilizações específicas do projeto -->
-    <link rel="icon" href="./Images/favicon.png" type="image/png">
+    <link rel="icon" href="./Images/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" href="./Images/apple-touch-icon.png">
     <link rel="stylesheet" href="./Styles/Main.css" />
    
   </head>
-
   <!-- Corpo da página -->
   <body class="bg-gray-200">
-    <!-- Div raiz onde o React será renderizado -->
     <div id="root" class="min-h-screen"></div>
-
-    <!-- Script principal com código React -->
+    <!-- Script para o React -->
     <script type="text/babel">
-      // Importação de hooks do React
+      // Importação dos hooks do React - componentes
       const { useState, useEffect, useRef } = React;
 
-      // Definição dos personagens e suas imagens
       const CHARACTERS = {
         RiskBot: { image: "./Images/RiskBot.png" }
       };
 
-  
-
-      // Componente da barra de progresso específica do RiskBot
-      const RiskBotProgressBar = ({ progress = 0 }) => {
+      function RiskBotProgressBar() {
         return (
-          <div className="bg-gray-600 w-full pb-6 h-20 border-b-4 border-blue-800 rounded-lg">
-            <div className="px-4">
-              <div className="flex items-center justify-between mb-2">
-                <div className="flex items-center gap-6">
-                  <div className="flex items-center">
-                    <img
-                      src="./Images/KnowRisk.png"
-                      alt="KnowRisk Logo"
-                      className="h-16 mt-2 mr-4"
-                    />
-                    <div className="w-12 h-12 flex items-center justify-center overflow-hidden">
-                      <img
-                        src="./Images/RiskBot.png"
-                        alt="KnowBot Logo"
-                        className="w-full h-full object-cover"
-                      />
-                    </div>
-                    
-                    <span className="font-bold text-white text-base ml-4">
-                      RiskBot apresenta: "AI - Mudança ou Extinção"
-                    </span>
-                  </div>
+          <div className="bg-gray-600 w-full rounded-lg" style={{height: '80px', width: '100%'}}>
+            <div className="flex w-full h-full">
+               {/* Logo da KnowRisk */}
+              <div className="flex items-center justify-center p-4" style={{width: '20%'}}>
+                <div className="w-16 h-16">
+                  <img
+                    src="./Images/KnowRisk.png"
+                    alt="KnowRisk Logo"
+                    className="w-full h-full object-contain"
+                  />
+                </div>
+              </div>
+              {/* Texto da KnowRisk */}
+              <div className="flex items-center justify-center p-4" style={{width: '60%'}}>
+                <span className="font-bold text-white text-base text-center whitespace-pre-wrap md:whitespace-normal">
+                  RiskBot: Seu guia para o universo da IA
+                </span>
+              </div>
+              {/* Logo do RiskBot */}
+              <div className="flex items-center justify-center p-4" style={{width: '20%'}}>
+                <div className="w-16 h-16">
+                  <img
+                    src="./Images/RiskBot.png"
+                    alt="RiskBot Logo"
+                    className="w-full h-full object-contain"
+                  />
                 </div>
               </div>
             </div>
           </div>
         );
-      };
-
-     
-      // Este componente CharacterAvatars é responsável por renderizar o avatar/imagem de um personagem
-      // Ele recebe o nome do personagem como prop e:
-      // 1. Busca os dados do personagem em um objeto CHARACTERS
-      // 2. Exibe a imagem do personagem se encontrada, ou uma imagem padrão caso contrário
-      // 3. Aplica estilização para tornar a imagem circular e com dimensões específicas
+      }
+      // Avatar do RiskBot carregando o avatar a partir do endereço relativo
       function CharacterAvatars({ characterName }) {
-        // Como só temos o RiskBot, podemos simplificar o componente
         return (
           <div className="character-avatar">
             <img
@@ -98,8 +77,7 @@
           </div>
         );
       }
-
-      // Componente do ícone de avião de papel
+      // Icone de enviar - PaperPlaneIcon - ele é criado com traços e não é um SVG
       function PaperPlaneIcon() {
         return (
           <svg
@@ -107,97 +85,99 @@
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
+            style={{width: '20px', height: '20px', marginLeft: '8px', stroke: 'currentColor'}}
           >
             <path d="M22 2L11 13" />
             <path d="M22 2L15 22L11 13L2 9L22 2Z" />
           </svg>
         );
       }
-      
-      // Componente principal da interface de chat
+      // Interface do chat - é a interface que o usuário vê - que é a função principal ChatInterface
       function ChatInterface() {
-        // Gerenciamento de estado do usuário
+        // Salva os dados do usuário no localStorage
         const savedUserData = localStorage.getItem("userData");
         const initialUserData = savedUserData
           ? JSON.parse(savedUserData)
           : { name: "", email: "", company: "" };
-       
-        // Estado inicial das mensagens
+        // Estado para armazenar as mensagens do chat
         const [messages, setMessages] = useState([]);
-        
+        // Estado para mostrar o formulário de cadastro
+        const [showUserForm, setShowUserForm] = useState(false);
+        // Estado para armazenar os dados do usuário
+        const [userData, setUserData] = useState(initialUserData);
+        // Estado para verificar se o RiskBot está digitando
+        const [isTyping, setIsTyping] = useState(false);
+        // Estado para mostrar as respostas
+        const [showAnswers, setShowAnswers] = useState(false);
+        // Estado para mostrar o resultado
+        const [showResult, setShowResult] = useState(false);
+        // Estado para verificar se a conversa foi iniciada
+        const [conversationStarted, setConversationStarted] = useState(false);
+        // Estado para armazenar o progresso
+        const [progress, setProgress] = useState(0);
+        // Estado para verificar se o botão foi clicado
+        const [buttonClicked, setButtonClicked] = useState(false);
+        // Estado para mostrar o diálogo do RiskBot
+        const [showRiskbotDialog, setShowRiskbotDialog] = useState(false);
+        // Estado para armazenar o conteúdo do diálogo do RiskBot
+        const [riskbotDialogContent, setRiskbotDialogContent] = useState("");
+        // Estado para verificar se o diálogo de link está aberto
+        const [isLinkDialogOpen, setIsLinkDialogOpen] = useState(false);
+        // Referencia para o container do chat
+        const chatContainerRef = useRef(null);
+        // Referencia para verificar se as mensagens foram enviadas - para evitar que o RiskBot fique digitando infinitamente 
+        const messagesSentRef = useRef(false);
+
         useEffect(() => {
-          // Mostrar typing indicator inicial
-          setIsTyping(true);
-          
-          // Primeira mensagem após 1 segundo
-          setTimeout(() => {
-            setIsTyping(false);
-            setMessages([{
-              character: "RiskBot",
-              text:<div>
-                Olá, meu nome é RiskBot. <strong>Bem vindo a nova era da IA.</strong> 
-                 Estaremos falando de IA em nosso Bot.
-                <strong>O conteúdo será atualizado semanalmente</strong>. Volte sempre que puder!! Vamos lá?
-              </div>,
-              isFirstMessage: true,
-            }]);
-            
-            // Typing indicator entre mensagens
+          if (!messagesSentRef.current) {
+            // O RiskBot começa a digitar - primeira digitação antes de começar a conversa
             setIsTyping(true);
-            
-            // Segunda mensagem após mais 1 segundo
+            // Tempo para o RiskBot começar a digitar
             setTimeout(() => {
+              // O RiskBot para de digitar
+              messagesSentRef.current = true;
               setIsTyping(false);
-              setMessages(prev => [...prev, {
-                character: "RiskBot", 
-                text: "Este conteúdo foi feito especialmente para quem quer saber a respeito de IA e inovação. Como disse, ele será continuamente atualizado com novas informações e insights.",
-                showButton: true,
+              setMessages([{
+                character: "RiskBot",
+                text: <div>
+                  Olá, meu nome é RiskBot. <strong>Bem vindo a nova era da IA.</strong> Estaremos falando de IA em nosso Bot.
+                  <strong>O conteúdo será atualizado semanalmente</strong>. Volte sempre que puder!! Vamos lá?
+                </div>,
+                isFirstMessage: true
               }]);
+              
+              setIsTyping(true);
+              
+              setTimeout(() => {
+                setIsTyping(false);
+                setMessages(prev => [...prev, {
+                  character: "RiskBot", 
+                  text: "Este conteúdo foi feito especialmente para quem quer saber a respeito de IA e inovação. Como disse, ele será continuamente atualizado com novas informações e insights.",
+                  showButton: true
+                }]);
+              }, 2000);
+              
             }, 2000);
-            
-          }, 2000);
+          }
         }, []);
 
-        // Estados diversos para controle da interface
-        const [showUserForm, setShowUserForm] = useState(false);
-        const [userData, setUserData] = useState(initialUserData);
-        const [isTyping, setIsTyping] = useState(false);
-        const [showAnswers, setShowAnswers] = useState(false);
-        const [showResult, setShowResult] = useState(false);
-        const [conversationStarted, setConversationStarted] = useState(false);
-        const [progress, setProgress] = useState(0);
-        const [buttonClicked, setButtonClicked] = useState(false);
-        const [showRiskbotDialog, setShowRiskbotDialog] = useState(false);
-        const [riskbotDialogContent, setRiskbotDialogContent] = useState("");
-        const [isLinkDialogOpen, setIsLinkDialogOpen] = useState(false);
-        
-        // Referência para o container de chat
-        const chatContainerRef = useRef(null);
-
-        // Efeito para scroll automático
         useEffect(() => {
           if (chatContainerRef.current) {
             chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
           }
         }, [messages, showAnswers]);
 
-        // Função para adicionar mensagens
         const addMessage = (character, text, responded = false, showButton = false) => {
           setMessages((prev) => [...prev, { character, text, responded, showButton }]);
         };
 
-        // Função para iniciar conversa com o usuário
         const startConversation = () => {
-          // Esta função é chamada quando o usuário clica no botão inicial do RiskBot
-          // Ela inicia o fluxo de coleta dos dados do usuário (nome, email e empresa)
-          // através do formulário que será exibido
           if (!buttonClicked) {
-            setButtonClicked(true); // Marca que o botão foi clicado
-            setShowUserForm(true);  // Exibe o formulário de dados do usuário
+            setButtonClicked(true);
+            setShowUserForm(true);
           }
         };
 
-        // Função para lidar com envio do formulário
         const handleUserSubmit = async (e) => {
           e.preventDefault();
           try {
@@ -214,64 +194,83 @@
               throw new Error("Failed to register user");
             }
 
-            // Salva os dados do usuário no armazenamento local do navegador para uso futuro
             localStorage.setItem("userData", JSON.stringify(userData));
-            
-            // Esconde o formulário de entrada do usuário
             setShowUserForm(false);
-            
-            // Marca que a conversa foi iniciada
             setConversationStarted(true);
-            
-            // Adiciona uma mensagem de boas-vindas personalizada do RiskBot
-            // usando o nome e empresa fornecidos pelo usuário
-            // Adiciona o indicador de digitação
-            // Adiciona o indicador de digitação fora da caixa de diálogo
             setIsTyping(true);
 
-            // Adiciona delay para simular digitação
             setTimeout(() => {
               setIsTyping(false);
              
               addMessage(
                 "RiskBot",
                 <div>
-                  Olá <strong>{userData.name}</strong> da <strong>{userData.company}</strong>! Clique no botão abaixo para acessar o conteúdo.
+                  Olá <strong>{userData.name}</strong> da <strong>{userData.company}</strong>! Escolha uma das opções abaixo para continuar.
                 </div>
               );
 
-              // Adiciona o indicador de digitação
               setIsTyping(true);
               
               setTimeout(() => {
                 setIsTyping(false);
                 
-                // Adiciona o botão de acesso após a mensagem de boas-vindas
                 addMessage(
                   "RiskBot",
                   <div className="flex flex-col items-center space-y-4">
                     <div className="flex flex-row space-x-4">
-                      <a 
-                        href="https://genai.knowfuture.tech/genai"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded inline-block"
-                      >
-                        Acessar Conteúdo
-                      </a>
-                      <a
-                        href="https://arbachegit.github.io/ambidestriaInova/" 
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded inline-block"
-                      >
-                        Quer testar a sua ambidestria?
-                      </a>
+                      <div className="flex flex-col space-y-4">
+                        <button
+                          onClick={() => {
+                            setIsTyping(true);
+                            setTimeout(() => {
+                              setIsTyping(false);
+                              addMessage(
+                                "RiskBot",
+                                <div className="flex flex-col items-center w-full">
+                                  <div className="flex flex-col w-full space-y-2">
+                                    <div className="grid grid-cols-1 gap-2 w-full">
+                                      <a href="https://genai.knowfuture.tech/genai" target="_blank" rel="noopener noreferrer" className="border-2 border-gray-700 hover:bg-gray-100 text-gray-700 font-medium py-2 px-4 rounded-lg text-center transition-colors duration-200 w-full">
+                                        A era da IA
+                                      </a>
+                                      <a href="https://genai.knowfuture.tech/" target="_blank" rel="noopener noreferrer" className="border-2 border-gray-700 hover:bg-gray-100 text-gray-700 font-medium py-2 px-4 rounded-lg text-center transition-colors duration-200 w-full">
+                                        Mitos e Verdades sobre IA
+                                      </a>
+                                      <a href="https://ai.knowfuture.tech/" target="_blank" rel="noopener noreferrer" className="border-2 border-gray-700 hover:bg-gray-100 text-gray-700 font-medium py-2 px-4 rounded-lg text-center transition-colors duration-200 w-full">
+                                        A sua empresa na era da IA?
+                                      </a>
+                                      <a href="https://moneyai.knowfuture.tech/" target="_blank" rel="noopener noreferrer" className="border-2 border-gray-700 hover:bg-gray-100 text-gray-700 font-medium py-2 px-4 rounded-lg text-center transition-colors duration-200 w-full">
+                                        Benefícios da IA
+                                      </a>
+                                      <a href="https://logistica-ia-23aw5z9.gamma.site/" target="_blank" rel="noopener noreferrer" className="border-2 border-gray-700 hover:bg-gray-100 text-gray-700 font-medium py-2 px-4 rounded-lg text-center transition-colors duration-200 w-full">
+                                        Logística na era da IA
+                                      </a>
+                                      <a href="https://know-risk.ai/" target="_blank" rel="noopener noreferrer" className="border-2 border-gray-700 hover:bg-gray-100 text-gray-700 font-medium py-2 px-4 rounded-lg text-center transition-colors duration-200 w-full">
+                                        Implemente IA em sua empresa
+                                      </a>
+                                    </div>
+                                  </div>
+                                </div>
+                              );
+                            }, 1000);
+                          }}
+                          className="border-2 border-gray-700 hover:bg-gray-100 text-gray-700 font-medium py-2 px-4 rounded-lg text-center transition-colors duration-200 w-full"
+                        >
+                          Conteúdos de IA
+                        </button>
+                        <a
+                          href="https://arbachegit.github.io/ambidestriaInova/" 
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="border-2 border-gray-700 hover:bg-gray-100 text-gray-700 font-medium py-2 px-4 rounded-lg text-center transition-colors duration-200 w-full"
+                        >
+                          Quer testar a sua ambidestria?
+                        </a>
+                      </div>
                     </div>
                   </div>
                 );
-              }, 2000); // 2 segundos de delay
-            }, 2000); // 2 segundos de delay
+              }, 2000);
+            }, 2000);
             
           } catch (error) {
             console.error("Erro ao processar o formulário:", error);
@@ -283,7 +282,6 @@
           }
         };
 
-        // Renderização da interface principal
         return (
           <div className="min-h-screen bg-gray-200 flex items-start justify-center py-8">
             <div className="bg-white rounded-lg shadow-lg p-6 max-w-2xl mx-auto w-full relative">
@@ -319,7 +317,6 @@
                         style={{ maxWidth: "100%" }}
                       >
                         <CharacterAvatars characterName={msg.character} />
-                        {/* Conteúdo da mensagem */}
                         <div className="flex-grow">
                           <p className="font-semibold">{msg.character}</p>
                           <p>{msg.text}</p>
@@ -347,38 +344,27 @@
                       </div>
                     </div>
                   )}
-                  
-                
                 </div>
               </div>
             </div>
-            {/* Formulário de usuário */}
-            {/* Este trecho de código é um componente de formulário em React que é renderizado condicionalmente
-                através da variável de estado 'showUserForm'. 
-                
-                Quando showUserForm é true, ele renderiza um modal (janela flutuante) que contém um formulário
-                para coletar informações do usuário como nome, email e empresa.
 
-                O formulário usa:
-                - Estado (userData) para gerenciar os dados do formulário
-                - Evento onSubmit para processar o envio do formulário (handleUserSubmit)
-                - Componentes controlados com value e onChange para cada campo
-                - Estilização usando classes do Tailwind CSS
-                
-                O modal tem um fundo semi-transparente (bg-black bg-opacity-50) e está centralizado na tela.
-                O formulário em si tem um fundo branco, padding e bordas arredondadas.
-                
-                Cada campo do formulário é obrigatório (required) e possui:
-                - Label descritivo
-                - Input com estilização e estados de foco
-                - Validação básica de tipo (email para o campo de email)
-                
-                O botão de submit é estilizado em azul e ocupa toda a largura do formulário */}
+
+            {/* Formulário de cadastro */}
             {showUserForm && (
               <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                 <div className="bg-white p-6 rounded-lg w-full max-w-md mx-4">
                   <h3 className="text-xl font-bold mb-4">Antes de começarmos...</h3>
-                  <form onSubmit={handleUserSubmit} className="space-y-4">
+                  <form onSubmit={async (e) => {
+                    e.preventDefault();
+                    try {
+                      if (userData.name && userData.email && userData.company) {
+                        await handleUserSubmit(e);
+                        setShowUserForm(false);
+                      }
+                    } catch (error) {
+                      console.error("Erro ao processar formulário:", error);
+                    }
+                  }} className="space-y-4">
                     <div>
                       <label htmlFor="name" className="block text-sm font-medium text-gray-700">
                         Nome
@@ -390,6 +376,7 @@
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
                         value={userData.name}
                         onChange={(e) => setUserData((prev) => ({ ...prev, name: e.target.value }))}
+                        disabled={savedUserData}
                       />
                     </div>
                     <div>
@@ -403,6 +390,7 @@
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
                         value={userData.email}
                         onChange={(e) => setUserData((prev) => ({ ...prev, email: e.target.value }))}
+                        disabled={savedUserData}
                       />
                     </div>
                     <div>
@@ -416,11 +404,29 @@
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
                         value={userData.company}
                         onChange={(e) => setUserData((prev) => ({ ...prev, company: e.target.value }))}
+                        disabled={savedUserData}
                       />
                     </div>
+                    {/* Botão de submit */}
                     <button
                       type="submit"
-                      className="w-full bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors"
+                      className={`w-full px-4 py-2 rounded transition-colors ${
+                        !userData.name || !userData.email || !userData.company
+                          ? "bg-gray-400 cursor-not-allowed" 
+                          : "bg-blue-500 hover:bg-blue-600 text-white"
+                      }`}
+                      disabled={!userData.name || !userData.email || !userData.company}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const button = e.currentTarget;
+                        button.disabled = true;
+                        handleUserSubmit(e).then(() => {
+                          setShowUserForm(false);
+                        }).catch((error) => {
+                          console.error("Error processing form:", error);
+                          button.disabled = false;
+                        });
+                      }}
                     >
                       Começar
                     </button>
@@ -428,15 +434,14 @@
                 </div>
               </div>
             )}
-            
           </div>
         );
       }
 
-      // Renderização do componente principal na div root
-      ReactDOM.render(<ChatInterface />, document.getElementById("root"));
+      const root = document.getElementById("root");
+      const rootElement = ReactDOM.createRoot(root);
+      rootElement.render(<ChatInterface />);
       
     </script>
-
   </body>
 </html>
