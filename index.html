@@ -226,7 +226,7 @@
               
               setTimeout(() => {
                 setIsTyping(false);
-                
+                // Mensagem do RiskBot para o usuário
                 addMessage(
                   "RiskBot",
                   <div>
@@ -235,6 +235,7 @@
                     </div>
                     <div className="flex flex-col items-center w-full">
                       <div className="flex flex-col w-full space-y-4">
+                        {/* Botão para acessar os conteúdos de IA */}
                         <button
                           id="conteudos-ia-btn"
                           onClick={() => {
@@ -335,14 +336,66 @@
                             Conteúdos de IA
                           </div>
                         </button>
-                        <a
-                          href="https://arbachegit.github.io/ambidestriaInova/"
-                          target="_blank"
-                          rel="noopener noreferrer" 
+                        {/* Botão para testar a ambidestria */}
+                        <button
+                          id="ambidestria-btn"
+                          onClick={(e) => {
+                            const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                            
+                            const tooltip = document.createElement('div');
+                            tooltip.className = isMobile ? 'fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50' : 'absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 z-50';
+                            tooltip.innerHTML = `
+                              <div class="bg-white rounded-lg shadow-lg p-4 max-w-sm mx-auto">
+                                <div class="flex items-center">
+                                  <div class="flex-shrink-0 mr-3">
+                                    <img
+                                      src="${CHARACTERS.Dani.image}"
+                                      alt="Dani avatar" 
+                                      class="w-10 h-10 rounded-full"
+                                    />
+                                  </div>
+                                  <p class="text-sm text-gray-700">
+                                    <h3><strong>Olá!</strong> Ao clicar neste botão, você será redirecionado para um <strong>teste</strong> que avalia sua <strong>ambidestria</strong>. <strong>Uma dica:</strong> reserve um tempo para respondê-lo com calma. Este teste é <strong>totalmente gratuito</strong> e está baseado em <strong>IA</strong>.</h3>
+                                  </p>
+                                </div>
+                                ${isMobile ? `
+                                  <div class="flex justify-center space-x-4 mt-4">
+                                    <button onClick="this.closest('.fixed').remove()" class="px-4 py-2 bg-gray-200 rounded-lg">Voltar</button>
+                                    <button 
+                                      onClick="(() => {
+                                        const modal = document.querySelector('.fixed');
+                                        if (modal) {
+                                          modal.remove();
+                                          window.open('https://arbachegit.github.io/ambidestriaInova/', '_blank');
+                                        }
+                                      })()"
+                                      class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                                    >
+                                      Continuar
+                                    </button>
+                                  </div>
+                                ` : ''}
+                              </div>
+                            `;
+                            
+                            if (!isMobile) {
+                              e.currentTarget.appendChild(tooltip);
+                            } else {
+                              document.body.appendChild(tooltip);
+                            }
+                          }}
+                          onMouseLeave={(e) => {
+                            if (!/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+                              const tooltip = e.currentTarget.querySelector('.absolute');
+                              if (tooltip) {
+                                e.currentTarget.removeChild(tooltip);
+                              }
+                            }
+                          }}
                           className="border-2 border-gray-700 hover:bg-white whitespace-normal text-gray-700 font-medium py-2 px-4 rounded-lg text-center transition-colors duration-200 w-full"
                         >
                           Quer testar a sua ambidestria?
-                        </a>
+                        </button>
                       </div>
                     </div>
                   </div>
