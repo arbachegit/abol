@@ -301,10 +301,16 @@
                                       <button onClick="this.closest('.fixed').remove()" class="px-4 py-2 bg-gray-200 rounded-lg">Voltar</button>
                                       <button 
                                         onClick={(e) => {
-                                          e.currentTarget.closest('.fixed').remove();
-                                          document.querySelector('button[class*="border-2 border-gray-700"]').click();
+                                          const modal = e.target.closest('.fixed');
+                                          if (modal) {
+                                            modal.remove();
+                                            const originalButton = document.querySelector('button[class*="border-2 border-gray-700"]');
+                                            if (originalButton) {
+                                              originalButton.click();
+                                            }
+                                          }
                                         }} 
-                                        className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+                                        className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
                                       >
                                         Continuar
                                       </button>
