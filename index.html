@@ -185,6 +185,8 @@
         const chatContainerRef = useRef(null);
         // Referencia para verificar se as mensagens foram enviadas - para evitar que o RiskBot fique digitando infinitamente 
         const messagesSentRef = useRef(false);
+        // Estado para controlar a visibilidade do modal
+        const [showHelpModal, setShowHelpModal] = useState(false);
 
         // Efeito para o RiskBot começar a digitar - primeira digitação antes de começar a conversa
         useEffect(() => {
@@ -496,7 +498,7 @@
             console.error("Erro ao processar o formulário:", error);
             addMessage(
               "RiskBot",
-              "Desculpe, ocorreu um erro ao processar suas informações. Por favor, tente novamente."
+              "Desculpe, ocorreu um erro ao processar suas informaç���es. Por favor, tente novamente."
             );
             setShowUserForm(true);
           }
@@ -579,28 +581,35 @@
                   )}
                 </div>
                 <ScrollArrow />
+
                 {/* Botão de ajuda com a Dani */}
                 <div className="absolute bottom-4 right-4">
                   <button
-                    onClick={() => {
-                      setIsTyping(true);
-                      setTimeout(() => {
-                        setIsTyping(false);
-                        addMessage(
-                          "Dani",
-                          <div>
-                            Olá! Estou aqui para ajudar você a entender melhor os conteúdos. 
-                            Você pode explorar os links acima para aprender mais sobre IA, 
-                            ou fazer o teste de Ambidestria para descobrir suas habilidades únicas!
-                          </div>
-                        );
-                      }, 1000);
+                    id="ajuda-dani-btn"
+                    onClick={() => setShowHelpModal(true)}
+                    className="help-button flex items-center space-x-2 bg-pink-100 hover:bg-pink-200 rounded-full px-4 py-2 shadow-lg transition-all duration-200"
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.zIndex = "1000";
+                      // Prevenir que outros elementos recebam eventos do mouse
+                      e.stopPropagation();
+                      // Adicionar uma classe que bloqueia interações com elementos abaixo
+                      document.body.classList.add('help-button-active');
                     }}
-                    className="help-button flex items-center space-x-2 bg-pink-100 <hover:bg-pink-2></hover:bg-pink-2>00 rounded-full px-4 py-2 shadow-lg transition-all duration-200"
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.zIndex = "999";
+                      // Remover a classe que bloqueia interações
+                      document.body.classList.remove('help-button-active');
+                    }}
+                    style={{
+                      pointerEvents: 'auto',
+                      cursor: 'pointer',
+                      position: 'relative',
+                      zIndex: 999
+                    }}
                   >
                     <img
                       src={CHARACTERS.Dani.image}
-                      alt="Dani avatar"
+                      alt="Dani avatar" 
                       className="w-8 h-8 rounded-full border-2 border-pink-200"
                     />
                     <span className="text-sm font-medium text-gray-700">Quer ajuda?</span>
@@ -608,7 +617,6 @@
                 </div>
               </div>
             </div>
-
 
             {/* Formulário de cadastro */}
             {showUserForm && (
@@ -692,6 +700,76 @@
                       Preparado para começar?
                     </button>
                   </form>
+                </div>
+              </div>
+            )}
+
+            {/* Modal de Ajuda */}
+            {showHelpModal && (
+              <div 
+                className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center modal-overlay" 
+                style={{ zIndex: 2000 }}
+                onClick={(e) => {
+                  // Fecha o modal se clicar fora do conteúdo
+                  if (e.target === e.currentTarget) {
+                    setShowHelpModal(false);
+                  }
+                }}
+              >
+                <div 
+                  className="bg-white p-6 rounded-lg w-full max-w-md mx-4 relative modal-content"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                  }}
+                >
+                  <button
+                    id="modal-Xclose-btn"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      setShowHelpModal(false);
+                    }}
+                    className="modal-close-button"
+                    aria-label="Fechar modal"
+                    style={{ 
+                      zIndex: 2002,
+                      cursor: 'pointer',
+                      pointerEvents: 'all',
+                      position: 'absolute',
+                      top: '12px',
+                      right: '12px'
+                    }}
+                  >
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="close-icon"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="#4A5568"
+                      style={{ 
+                        pointerEvents: 'none',
+                        width: '24px',
+                        height: '24px',
+                        strokeWidth: '3'
+                      }}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={3}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                  <div className="flex items-center space-x-4 mb-4">
+                    <img
+                      src={CHARACTERS.Dani.image}
+                      alt="Dani avatar"
+                      className="w-12 h-12 rounded-full border-2 border-pink-200"
+                    />
+                    <h3 className="text-xl font-bold">Oi, como posso ajudar?</h3>
+                  </div>
                 </div>
               </div>
             )}
