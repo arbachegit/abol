@@ -82,4 +82,5 @@ class InteractionTracker {
   }
 }
 
+// Exportar como módulo ES6
 export const tracker = new InteractionTracker(); 

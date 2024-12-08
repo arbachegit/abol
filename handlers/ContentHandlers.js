@@ -1,4 +1,4 @@
-import { tracker } from '../utils/InteractionTracker.js';
+import { tracker } from './InteractionTracker.js';
 import React from 'react';
 
 export const handleContentClick = (props) => {
