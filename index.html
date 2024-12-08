@@ -1,66 +1,50 @@
 <!doctype html>
 <html lang="pt-BR">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bem-vindo ao mundo da IA</title>
-    
     <!-- React e Babel -->
     <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     
-    <!-- Tailwind CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-    <link rel="icon" href="./Images/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" href="./Images/apple-touch-icon.png">
-    <link rel="stylesheet" href="./Styles/Main.css" />
-    <script src="./Components/HelpModal.js"></script>
-    <script src="./utils/InteractionTracker.js" type="module"></script>
-    <script src="./handlers/ContentHandlers.js" type="module"></script>
-    <script src="./Components/UserForm.js" type="module"></script>
+    <!-- Estilos -->
     <link rel="stylesheet" href="./Styles/theme.css" />
     <link rel="stylesheet" href="./Styles/components.css" />
-    <script type="module" src="./config/messages.js"></script>
-    <script type="text/babel" src="./Components/Icons/PaperPlaneIcon.js"></script>
-    <script type="text/babel" src="./Components/ScrollArrow/ScrollArrow.js"></script>
-    <script type="text/babel" src="./Components/UserForm.js"></script>
-    <script type="text/babel" src="./utils/InteractionTracker.js"></script>
-
-    <!-- Lista de IDs e suas funções: -->
-    <!-- root - Elemento raiz onde o React renderiza toda a aplicação -->
-    <!-- modal-Xclose-btn - Botão para fechar o modal de ajuda da Dani -->
-    <!-- start-journey-btn - Botão para iniciar a jornada/conversa com o RiskBot -->
-    <!-- Aparece na primeira mensagem do RiskBot e inicia o fluxo de cadastro -->
-    <!-- ajuda-dani-btn - Botão flutuante para abrir o modal de ajuda da Dani -->
-    <!-- Permite acessar informações e ajuda a qualquer momento -->
-      
   </head>
-  <!-- Corpo da página -->
-  <body class="bg-gray-200">
-    <div id="root" class="min-h-screen"></div>
-    <!-- Script para o React -->
+  <body>
+    <div id="root"></div>
+
+    <!-- Scripts em ordem de dependência -->
     <script type="text/babel">
-      // Aguardar todos os componentes carregarem
-      window.addEventListener('load', () => {
-        const { 
-          PaperPlaneIcon, 
-          ScrollArrow, 
-          UserForm, 
-          tracker 
-        } = window;
+      // InteractionTracker
+      class InteractionTracker {
+        // ... código do tracker ...
+      }
+      window.tracker = new InteractionTracker();
 
-        function ChatInterface() {
-          // ... resto do código do ChatInterface
-        }
+      // PaperPlaneIcon
+      window.PaperPlaneIcon = function({ className }) {
+        // ... código do ícone ...
+      };
 
-        const root = document.getElementById("root");
-        const rootElement = ReactDOM.createRoot(root);
-        rootElement.render(React.createElement(ChatInterface));
-      });
+      // ScrollArrow
+      window.ScrollArrow = function({ chatContainerRef }) {
+        // ... código do ScrollArrow ...
+      };
+
+      // UserForm
+      window.UserForm = function(props) {
+        // ... código do formulário ...
+      };
+
+      // ChatInterface
+      function ChatInterface() {
+        // ... código da interface ...
+      }
+
+      // Renderizar aplicação
+      const root = document.getElementById("root");
+      const rootElement = ReactDOM.createRoot(root);
+      rootElement.render(React.createElement(ChatInterface));
     </script>
   </body>
 </html>
