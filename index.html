@@ -25,8 +25,10 @@
     <link rel="stylesheet" href="./Styles/theme.css" />
     <link rel="stylesheet" href="./Styles/components.css" />
     <script type="module" src="./config/messages.js"></script>
-    <script type="module" src="./Components/Icons/PaperPlaneIcon.js"></script>
-    <script type="module" src="./Components/ScrollArrow/ScrollArrow.js"></script>
+    <script type="text/babel" src="./Components/Icons/PaperPlaneIcon.js"></script>
+    <script type="text/babel" src="./Components/ScrollArrow/ScrollArrow.js"></script>
+    <script type="text/babel" src="./Components/UserForm.js"></script>
+    <script type="text/babel" src="./utils/InteractionTracker.js"></script>
 
     <!-- Lista de IDs e suas funções: -->
     <!-- root - Elemento raiz onde o React renderiza toda a aplicação -->
@@ -42,24 +44,23 @@
     <div id="root" class="min-h-screen"></div>
     <!-- Script para o React -->
     <script type="text/babel">
-      // Componentes disponíveis globalmente
-      const { 
-        PaperPlaneIcon, 
-        ScrollArrow, 
-        UserForm, 
-        tracker,
-        handleContentClick,
-        INITIAL_MESSAGES, 
-        RESPONSE_MESSAGES 
-      } = window;
+      // Aguardar todos os componentes carregarem
+      window.addEventListener('load', () => {
+        const { 
+          PaperPlaneIcon, 
+          ScrollArrow, 
+          UserForm, 
+          tracker 
+        } = window;
 
-      function ChatInterface() {
-        // ... resto do código do ChatInterface
-      }
+        function ChatInterface() {
+          // ... resto do código do ChatInterface
+        }
 
-      const root = document.getElementById("root");
-      const rootElement = ReactDOM.createRoot(root);
-      rootElement.render(<ChatInterface />);
+        const root = document.getElementById("root");
+        const rootElement = ReactDOM.createRoot(root);
+        rootElement.render(React.createElement(ChatInterface));
+      });
     </script>
   </body>
 </html>

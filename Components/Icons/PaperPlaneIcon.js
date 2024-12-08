@@ -2,7 +2,8 @@
 
 import React from 'react';
 
-export const PaperPlaneIcon = ({ className }) => {
+// Definir componente globalmente
+window.PaperPlaneIcon = function PaperPlaneIcon({ className }) {
   return (
     <svg
       className={className || "paper-plane-icon"}
@@ -23,9 +24,4 @@ export const PaperPlaneIcon = ({ className }) => {
       </g>
     </svg>
   );
-};
-
-// Exportar globalmente
-window.PaperPlaneIcon = PaperPlaneIcon;
-
-export default PaperPlaneIcon; 
+}; 
