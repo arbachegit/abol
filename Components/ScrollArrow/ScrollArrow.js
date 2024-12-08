@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from 'react';
+/** @jsx React.createElement */
+import { useState, useEffect } from 'react';
 import { tracker } from '../../utils/InteractionTracker.js';
 
-const ScrollArrow = ({ chatContainerRef }) => {
+export const ScrollArrow = ({ chatContainerRef }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -70,6 +71,4 @@ const ScrollArrow = ({ chatContainerRef }) => {
 };
 
 // Para uso global quando necessário
-window.ScrollArrow = ScrollArrow;
-
-export default ScrollArrow; 
+window.ScrollArrow = ScrollArrow; 

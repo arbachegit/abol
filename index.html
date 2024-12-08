@@ -41,46 +41,15 @@
   <body class="bg-gray-200">
     <div id="root" class="min-h-screen"></div>
     <!-- Script para o React -->
-    <script type="text/babel">
-      // Definir variáveis globais para os módulos
-      let tracker;
-      let contentHandler;
+    <script type="text/babel" data-type="module">
+      import { tracker } from './utils/InteractionTracker.js';
+      import { handleContentClick } from './handlers/ContentHandlers.js';
+      import { ScrollArrow } from './Components/ScrollArrow/ScrollArrow.js';
+      import { PaperPlaneIcon } from './Components/Icons/PaperPlaneIcon.js';
+      import { UserForm } from './Components/UserForm.js';
+      import { INITIAL_MESSAGES, RESPONSE_MESSAGES } from './config/messages.js';
 
-      // Carregar módulos de forma assíncrona
-      async function loadModules() {
-        const interactionModule = await import('./utils/InteractionTracker.js');
-        const handlersModule = await import('./handlers/ContentHandlers.js');
-        
-        tracker = interactionModule.tracker;
-        contentHandler = handlersModule.handleContentClick;
-        
-        // Iniciar a aplicação após carregar os módulos
-        initApp();
-      }
-
-      // Função principal da aplicação
-      function initApp() {
-        function ChatInterface() {
-          // ... resto do código do ChatInterface ...
-          
-          const contentClickHandler = contentHandler({
-            trackButtonClick,
-            setShowHelpModal,
-            addMessage,
-            setIsTyping,
-            config
-          });
-          
-          // ... resto do código ...
-        }
-
-        const root = document.getElementById("root");
-        const rootElement = ReactDOM.createRoot(root);
-        rootElement.render(<ChatInterface />);
-      }
-
-      // Carregar módulos e iniciar aplicação
-      loadModules();
+      // Resto do código do ChatInterface...
     </script>
   </body>
 </html>

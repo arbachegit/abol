@@ -1,3 +1,5 @@
+/** @jsx React.createElement */
+
 import React from 'react';
 
 export const PaperPlaneIcon = ({ className }) => {

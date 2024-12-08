@@ -1,11 +1,7 @@
+/** @jsx React.createElement */
 import { tracker } from '../utils/InteractionTracker.js';
 
-const UserForm = ({ 
-  userData, 
-  setUserData, 
-  handleUserSubmit, 
-  setShowUserForm 
-}) => {
+export const UserForm = (props) => {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
       <div className="bg-white p-6 rounded-lg w-full max-w-md mx-4">
@@ -13,9 +9,9 @@ const UserForm = ({
         <form onSubmit={async (e) => {
           e.preventDefault();
           try {
-            if (userData.name && userData.email && userData.company) {
-              await handleUserSubmit(e);
-              setShowUserForm(false);
+            if (props.userData.name && props.userData.email && props.userData.company) {
+              await props.handleUserSubmit(e);
+              props.setShowUserForm(false);
               // Registrar interação de sucesso
               tracker.trackInteraction('forms', 'userRegistration', 'success');
             }
@@ -34,8 +30,8 @@ const UserForm = ({
               id="name"
               required
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
-              value={userData.name}
-              onChange={(e) => setUserData((prev) => ({ ...prev, name: e.target.value }))}
+              value={props.userData.name}
+              onChange={(e) => props.setUserData((prev) => ({ ...prev, name: e.target.value }))}
             />
           </div>
           <div>
@@ -47,8 +43,8 @@ const UserForm = ({
               id="email"
               required
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
-              value={userData.email}
-              onChange={(e) => setUserData((prev) => ({ ...prev, email: e.target.value }))}
+              value={props.userData.email}
+              onChange={(e) => props.setUserData((prev) => ({ ...prev, email: e.target.value }))}
             />
           </div>
           <div>
@@ -60,18 +56,18 @@ const UserForm = ({
               id="company"
               required
               className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500 p-2 border"
-              value={userData.company}
-              onChange={(e) => setUserData((prev) => ({ ...prev, company: e.target.value }))}
+              value={props.userData.company}
+              onChange={(e) => props.setUserData((prev) => ({ ...prev, company: e.target.value }))}
             />
           </div>
           <button
             type="submit"
             className={`w-full px-4 py-2 rounded transition-colors ${
-              !userData.name || !userData.email || !userData.company
+              !props.userData.name || !props.userData.email || !props.userData.company
                 ? "bg-gray-400 cursor-not-allowed" 
                 : "bg-blue-500 hover:bg-blue-600 text-white"
             }`}
-            disabled={!userData.name || !userData.email || !userData.company}
+            disabled={!props.userData.name || !props.userData.email || !props.userData.company}
           >
             Preparado para começar?
           </button>
@@ -79,6 +75,4 @@ const UserForm = ({
       </div>
     </div>
   );
-};
-
-export default UserForm; 
+}; 
