@@ -25,7 +25,7 @@ export const PaperPlaneIcon = ({ className }) => {
   );
 };
 
-// Para uso global quando necessário
+// Exportar globalmente
 window.PaperPlaneIcon = PaperPlaneIcon;
 
 export default PaperPlaneIcon; 

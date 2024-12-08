@@ -8,3 +8,11 @@ export const INITIAL_MESSAGES = {
   },
   // ... resto do código usando React.createElement ao invés de JSX
 }; 
+
+window.INITIAL_MESSAGES = {
+  // ... mensagens
+};
+
+window.RESPONSE_MESSAGES = {
+  // ... respostas
+}; 

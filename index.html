@@ -41,15 +41,25 @@
   <body class="bg-gray-200">
     <div id="root" class="min-h-screen"></div>
     <!-- Script para o React -->
-    <script type="text/babel" data-type="module">
-      import { tracker } from './utils/InteractionTracker.js';
-      import { handleContentClick } from './handlers/ContentHandlers.js';
-      import { ScrollArrow } from './Components/ScrollArrow/ScrollArrow.js';
-      import { PaperPlaneIcon } from './Components/Icons/PaperPlaneIcon.js';
-      import { UserForm } from './Components/UserForm.js';
-      import { INITIAL_MESSAGES, RESPONSE_MESSAGES } from './config/messages.js';
+    <script type="text/babel">
+      // Componentes disponíveis globalmente
+      const { 
+        PaperPlaneIcon, 
+        ScrollArrow, 
+        UserForm, 
+        tracker,
+        handleContentClick,
+        INITIAL_MESSAGES, 
+        RESPONSE_MESSAGES 
+      } = window;
 
-      // Resto do código do ChatInterface...
+      function ChatInterface() {
+        // ... resto do código do ChatInterface
+      }
+
+      const root = document.getElementById("root");
+      const rootElement = ReactDOM.createRoot(root);
+      rootElement.render(<ChatInterface />);
     </script>
   </body>
 </html>
