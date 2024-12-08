@@ -1,0 +1,101 @@
+{
+  "characters": {
+    "RiskBot": {
+      "image": "./Images/RiskBot2.png",
+      "name": "RiskBot"
+    },
+    "Dani": {
+      "image": "./Images/Dani.png",
+      "name": "Dani"
+    }
+  },
+  "elementIds": {
+    "root": {
+      "id": "root",
+      "description": "Elemento raiz onde o React renderiza toda a aplicação",
+      "interactions": {
+        "renders": 0
+      }
+    },
+    "modals": {
+      "helpModalClose": {
+        "id": "modal-Xclose-btn",
+        "description": "Botão para fechar o modal de ajuda da Dani",
+        "interactions": {
+          "clicks": 0,
+          "lastInteraction": null
+        }
+      }
+    },
+    "buttons": {
+      "startJourney": {
+        "id": "start-journey-btn",
+        "description": "Botão para iniciar a jornada/conversa com o RiskBot",
+        "interactions": {
+          "clicks": 0,
+          "lastInteraction": null,
+          "conversionRate": 0
+        }
+      },
+      "helpDani": {
+        "id": "ajuda-dani-btn",
+        "description": "Botão flutuante para abrir o modal de ajuda da Dani",
+        "interactions": {
+          "clicks": 0,
+          "lastInteraction": null,
+          "averageTimeOpen": 0
+        }
+      },
+      "iaContent": {
+        "id": "conteudos-ia-btn",
+        "description": "Botão para acessar os conteúdos de IA",
+        "interactions": {
+          "clicks": 0,
+          "lastInteraction": null,
+          "linkClicks": {
+            "desktop": 0,
+            "mobile": 0
+          }
+        }
+      }
+    }
+  },
+  "interactionTracking": {
+    "lastUpdate": null,
+    "totalSessions": 0,
+    "saveInterval": 5000
+  },
+  "links": {
+    "iaContent": [
+      {
+        "title": "A era da IA",
+        "url": "https://genai.knowfuture.tech/genai"
+      },
+      {
+        "title": "Mitos e Verdades sobre IA",
+        "url": "https://genai.knowfuture.tech/"
+      },
+      {
+        "title": "A sua empresa já está na era da IA?",
+        "url": "https://ai.knowfuture.tech/"
+      },
+      {
+        "title": "Transforme o Futuro da Sua Empresa com IA",
+        "url": "https://moneyai.knowfuture.tech/"
+      },
+      {
+        "title": "A logística para a era da IA",
+        "url": "https://ialog.knowfuture.tech/log"
+      },
+      {
+        "title": "Implemente IA em sua empresa",
+        "url": "https://know-risk.ai/"
+      }
+    ],
+    "ambidextrityTest": "https://arbachegit.github.io/ambidestriaInova/"
+  },
+  "api": {
+    "registerEndpoint": "https://back.knowyou.know-risk.ai/api/register",
+    "apiKey": "sk_test_12345_cKF9Jd8n2L5mP7vX4Y6hQ9wR3tN8bM1"
+  }
+} 

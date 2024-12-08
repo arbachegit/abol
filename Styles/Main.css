@@ -1,138 +1,206 @@
-
-href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
-rel="stylesheet"
 /* Estilos básicos para o body e html */
 body, html {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-    }
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
 
 /* Animação de bounce para os indicadores de digitação */
-    @keyframes bounce {
-      0%, 80%, 100% { transform: translateY(0); }
-      40% { transform: translateY(-10px); }
-    }
+@keyframes bounce {
+    0%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+  }
 
-/* Estilização dos indicadores de digitação (3 pontos animados) */
-    .typing-indicator span {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      background-color: #3B82F6;
-      border-radius: 50%;
-      margin: 0 2px;
-      animation: bounce 1.4s infinite ease-in-out;
-    }
+
+  /* Estilização dos indicadores de digitação (3 pontos animados) */
+.typing-indicator span {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: #3B82F6;
+    border-radius: 50%;
+    margin: 0 2px;
+    animation: bounce 1.4s infinite ease-in-out;
+  }
+
 
 /* Atrasos na animação para cada ponto do indicador de digitação */
-    .typing-indicator span:nth-child(1) { animation-delay: 0s; }
-    .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
-    .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+.typing-indicator span:nth-child(1) { animation-delay: 0s; }
+.typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
+
 
 /* Estilização do avatar dos personagens */    
-    .character-avatar {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      /*color: white;*/
-      flex-shrink: 0;
-    }
+.character-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    /*color: white;*/
+    flex-shrink: 0;
+  }
 
 /* Cores de fundo e hover para diferentes tipos de mensagens */
-    .riskbot-message { background-color: #f3f4f6; }
-    .riskbot-message:hover { background-color: #e5e7eb; }
-    .character-question { background-color: #dbeafe; }
-    .character-question:hover { background-color: #bfdbfe; }
-    .answer-optioncheck { background-color: #ffc4fc; }
-    .answer-optioncheck:hover { background-color: #ff9dfb; }
-    .answer-option { background-color: #d1fae5; }
-    .answer-option:hover { background-color: #a7f3d0; }
-    .selected-answer { background-color: #a7f3d0; }
+  .riskbot-message { background-color: #f3f4f6; }
+  .riskbot-message:hover { background-color: #e5e7eb; }
+  .character-question { background-color: #dbeafe; }
+  .character-question:hover { background-color: #bfdbfe; }
+  .answer-optioncheck { background-color: #ffc4fc; }
+  .answer-optioncheck:hover { background-color: #ff9dfb; }
+  .answer-option { background-color: #d1fae5; }
+  .answer-option:hover { background-color: #a7f3d0; }
+  .selected-answer { background-color: #a7f3d0; }
 
-/* Estilização do ícone de avião de papel */
-    .paper-plane-icon {
-      width: 24px;
-      height: 24px;
-      margin-left: 0.5rem;
-      transform: rotate(45deg);
-    }
+/* Estilos para dispositivos móveis */
+@media (max-width: 768px) {
+  /* Desabilitar interação direta com os botões fora do modal */
+  .mobile-disabled {
+    pointer-events: none;
+    opacity: 0.7;
+  }
 
-    .paper-plane-icon path {
-      stroke: currentColor;
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
+  /* Estilo para botões dentro do modal */
+  .modal-content button {
+    pointer-events: auto !important;
+    opacity: 1 !important;
+  }
+
+  /* Melhorar visibilidade da mensagem da Dani */
+  .modal-content .message {
+    font-size: 1.1em;
+    line-height: 1.5;
+  }
+}
+
+/* Garantir que os botões sejam clicáveis em desktop */
+@media (min-width: 769px) {
+  button {
+    pointer-events: auto !important;
+  }
+}
+
+.scroll-arrow {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  pointer-events: auto;
+}
+
+.scroll-arrow-button {
+  background-color: #01060f;
+  color: white;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+.scroll-arrow-button:hover {
+  background-color: #636060;
+  transform: scale(1.1);
+}
+
+.scroll-arrow-button:active {
+  transform: scale(0.95);
+}
+
+.scroll-arrow-button svg {
+  width: 20px;
+  height: 20px;
+  stroke-width: 3;
+}
+
+
+@keyframes blink {
+  0%, 100% {
+    transform: translateY(0%);
+  }
+  50% {
+    transform: translateY(-60%);
+  }
+}
+
+/* Estilo dos balões de diálogo */
+.character-question {
+  background-color: #f3f4f6;
+  border: 1px solid #f3f4f6;
+  transition: background-color 0.2s ease;
+}
+
+.character-question:hover {
+  background-color: #e5e7eb;
+}
+
+.riskbot-message {
+  background-color: #f3f4f6;
+  border: 1px solid #f3f4f6;
+  transition: background-color 0.2s ease;
+}
+/* Efeito de hover para a mensagem do RiskBot */
+.riskbot-message:hover {
+  background-color:  #e5e7eb;
+}
+
+.answer-optioncheck {
+  background-color: #f3f4f6;
+  border: 1px solid #f3f4f6;
+  transition: all 0.2s ease;
+}
+
+.answer-optioncheck:hover {
+  background-color: #e5e7eb;
+  transform: scale(1.01);
+}
 
 /* Estilização do container principal do chat */
-    .chat-container {
-      overflow-y: auto;
-      height: 100%;
-      padding-right: 5px;
-      scrollbar-width: thin;
-      scrollbar-color: #888 #f1f1f1;
-      position: relati;
-    }
+.chat-container {
+    overflow-y: auto;
+    height: 100%;
+    padding-right: 5px;
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+    position: relati;
+  }
 
 /* Estilização da barra de rolagem personalizada */
-    .chat-container::-webkit-scrollbar {
-      width: 8px;
-    }
+  .chat-container::-webkit-scrollbar {
+    width: 8px;
+  }
 /* Estilização da trilha da barra de rolagem */
-    .chat-container::-webkit-scrollbar-track {
-      background: #f1f1f1;
-    }
+  .chat-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+  }
 /* Estilização do polegar da barra de rolagem */
-    .chat-container::-webkit-scrollbar-thumb {
-      background: #888;
-      border-radius: 4px;
-    }
+  .chat-container::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
 /* Estilização do polegar da barra de rolagem ao passar o mouse */
-    .chat-container::-webkit-scrollbar-thumb:hover {
-      background: #555;
-    }
+  .chat-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  * Estilização do ícone de avião de papel */
+  .paper-plane-icon {
+    width: 24px;
+    height: 24px;
+    margin-left: 0.5rem;
+    transform: rotate(45deg);
+  }
 
-/* Estilização da seta de rolagem */
-    .scroll-arrow {
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease-in-out;
-      position: absolute;
-      bottom: 10px;
-      right: 10px;
-      z-index: 10;
-    }
-/* Estilização da seta de rolagem visível */
-    .scroll-arrow.visible {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-/* Estilização do botão de seta de rolagem */
-    .scroll-arrow-button {
-      background-color: #4A5568;
-      color: white;
-      border: none;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .scroll-arrow-button:hover {
-      background-color: #2D3748;
-    }
-
-    .scroll-arrow-button svg {
-      width: 24px;
-      height: 24px;
-    }
+  .paper-plane-icon path {
+    stroke: currentColor;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
