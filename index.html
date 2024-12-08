@@ -19,6 +19,8 @@
     <link rel="apple-touch-icon" href="./Images/apple-touch-icon.png">
     <link rel="stylesheet" href="./Styles/Main.css" />
     <script src="./Components/HelpModal.js"></script>
+    <script type="module" src="./utils/InteractionTracker.js"></script>
+    <script type="module" src="./handlers/ContentHandlers.js"></script>
 
     <!-- Lista de IDs e suas funções: -->
     <!-- root - Elemento raiz onde o React renderiza toda a aplicação -->
@@ -33,7 +35,7 @@
   <body class="bg-gray-200">
     <div id="root" class="min-h-screen"></div>
     <!-- Script para o React -->
-    <script type="text/babel">
+    <script type="module">
       // Importação dos hooks do React - componentes
       const { useState, useEffect, useRef } = React;
       import { tracker } from './utils/InteractionTracker.js';
